@@ -1,0 +1,27 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 25vw;
+    min-height: 33vh;
+    border: 5px solid black;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    background-image: linear-gradient(top right, #ffa949 10%, hotpink 40%, dodgerblue 95%);
+    color: white;
+}
+
+.Square {
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-image: url("./assets/unicorn.png"); */
+}

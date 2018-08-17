@@ -1,0 +1,31 @@
+
+* {
+    font-size: 50px;
+    font-family: Helvetica, sans-serif;
+}
+
+.header-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+.header {
+    font-weight: bold;
+    font-size: 1em;
+    padding: 25px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    font-size: 25px;
+    padding: 25px;
+}
