@@ -5,7 +5,7 @@ main {
     align-items: center;
 }
 
-section {
+.section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -20,8 +20,20 @@ section {
     color: white;
 }
 
-.Square {
+
+.section-change {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 25vw;
+    min-height: 33vh;
+    border: 5px solid black;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    background-image: url(./unicorn.png);
+    color: white;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-image: url("./assets/unicorn.png"); */
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Square from './square'
-import './board.css'
+import Square from './square';
+import './board.css';
 
 // NOTE: ICEBOXED:
     // Add a function that makes the winner's emoji rain down?
@@ -12,9 +12,10 @@ class Board extends Component {
         this.state = {
             squaresArr: ["", "", "", "", "", "", "", "", ""],
             players: ["", ""],
-            arrayOfEmojis: ["🤔", "🍳","🍑", "🍆", "🍦", "💊", "👽", "💩", "😏", "💅🏼", "👼🏿", "🦄", "🐒", "💨 ", "🐉", "💃🏻", "🎅🏿", "😘", "🤬", "🍄", "🚬 ", "🌚", "🐣", "🙅🏼‍", "🙄", "👺", "😲", "🍺", "🕴🏼", "🗿", "🛸", "💣", "🍣", "🦖", "🧘‍", "🔮", "🔪", "🚫", "🇰🇷", "🏋🏻‍", "🐙", "🤙🏾"],
+            arrayOfEmojis: ["🤔", "🍳","🍑", "🍆", "🍦", "💊", "👽", "💩", "😏", "💅🏼", "👼🏿", "🦄", "🐒", "💨 ", "🐉", "💃🏻", "🎅🏿", "😘", "🍄", "🚬 ", "🌚", "🐣", "🙅🏼‍", "🙄", "👺", "😲", "🍺", "🕴🏼", "🗿", "💣", "🍣", "🔮", "🔪", "🚫", "🇰🇷", "🏋🏻‍", "🐙", "🤙🏾"],
             turn: 0,
-            initializer: false
+            initializer: false,
+            gameOver: false
         }
     }
 
@@ -28,13 +29,32 @@ class Board extends Component {
         }
     }
 
+    resetBoard = () => {
+        let reset = ["", "", "", "", "", "", "", "", ""]
+        this.setState({squaresArr: reset})
+        // let { squaresArr, gameOver } = this.state
+        //
+        // for(let i = 0; i < squaresArr.length-1; i++) {
+        //     squaresArr[i] = ""
+        // }
+        //
+        // this.setState({
+        //     squaresArr: ["", "", "", "", "", "", "", "", ""],
+        //     players: ["", ""],
+        //     arrayOfEmojis: ["🤔", "🍳","🍑", "🍆", "🍦", "💊", "👽", "💩", "😏", "💅🏼", "👼🏿", "🦄", "🐒", "💨 ", "🐉", "💃🏻", "🎅🏿", "😘", "🍄", "🚬 ", "🌚", "🐣", "🙅🏼‍", "🙄", "👺", "😲", "🍺", "🕴🏼", "🗿", "💣", "🍣", "🔮", "🔪", "🚫", "🇰🇷", "🏋🏻‍", "🐙", "🤙🏾"],
+        //     turn: 0,
+        //     initializer: false,
+        //     gameOver: false
+        // })
+    }
+
     // TODO: add a rule that prevents the same randomNumber from being generated twice
 
     randomizer = () => {
         if(!this.state.initializer){
             var playerEmojis = ["",""]
             for (var i = 0; i < playerEmojis.length; i++) {
-                var randomNumber = Math.floor(Math.random()*this.state.arrayOfEmojis.length-1)+1
+                var randomNumber = Math.floor(Math.random()*this.state.arrayOfEmojis.length)
                 playerEmojis[i] = this.state.arrayOfEmojis[randomNumber]
             }
             this.setState({players: playerEmojis, initializer: true})
@@ -50,15 +70,16 @@ class Board extends Component {
         this.state.squaresArr[id] = playerId
     }
 
+
     checkWinner = () => {
 
-    let { squaresArr } = this.state
+    let { squaresArr, gameOver } = this.state
 
         // Horizontal check
         for(let i = 0; i < 9; i +=3) {
             if(squaresArr[i] != "") {
                 if(squaresArr[i] === squaresArr[i+1] && squaresArr[i+1] === squaresArr[i+2]) {
-                    return alert("Player " + squaresArr[i] + " Won Horizontally!")
+                    return alert("Player " + squaresArr[i] + " won Horizontally!")
                 }
             }
         }
@@ -66,16 +87,16 @@ class Board extends Component {
         for(let i = 0; i < 3; i ++) {
             if(squaresArr[i] != "") {
                 if(squaresArr[i] === squaresArr[i+3] && squaresArr[i+3] === squaresArr[i+6]) {
-                    return alert("Player " + squaresArr[i] + " Won Vertically!")
+                    return alert("Player " + squaresArr[i] + " won Vertically!")
                 }
             }
         }
         // Diagonal check
         if(squaresArr[4] != "") {
             if(squaresArr[0] === squaresArr[4] && squaresArr[4] === squaresArr[8]) {
-                return alert("Player " + squaresArr[4] + " Won Diagonally!")
+                return alert("Player " + squaresArr[4] + " won Diagonally!")
             } else if (squaresArr[2] === squaresArr[4] && squaresArr[4] === squaresArr[6]) {
-                return alert("Player " + squaresArr[4] + " Won Diagonally!")
+                return alert("Player " + squaresArr[4] + " won Diagonally!")
             }
         }
         return false
@@ -93,6 +114,7 @@ class Board extends Component {
         }
         if(nullCounter === 0) {
             alert("It's a cat's game!")
+            // this.resetBoard()
         }
     }
 
@@ -113,7 +135,6 @@ class Board extends Component {
         })
 
         return (
-            // TODO: add a reset button
 
             <main className="box">
                 {squares}

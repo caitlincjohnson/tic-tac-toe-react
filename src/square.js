@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-
+import sword from './sounds/sword.wav';
+import duck from './sounds/duck.wav';
+import kiss from './sounds/kiss.wav';
+import pig from './sounds/pig.wav';
+import monkey from './sounds/monkey.wav';
+import woop from './sounds/woop.wav';
+import sparkle from './sounds/sparkle.wav';
+import fart from './sounds/fart.wav';
+import horse from './sounds/horse.wav';
 
 class Square extends Component {
 
@@ -7,15 +15,22 @@ class Square extends Component {
         super(props)
         this.state = {
             players: '',
-            marked: false
-            // possibly add property status? set to 'null' at first
-            // this gets updated to 'complete' that prevents further clicks
-            // NOTE: ICEBOX: alert that notifies player that they cant click anymore
+            marked: false,
+            unicorn: true,
+            sounds: [new Audio(sword), new Audio(duck), new Audio(kiss), new Audio(pig), new Audio(monkey), new Audio(woop), new Audio(sparkle), new Audio(fart), new Audio(horse)],
+            sound: ''
         }
     }
 
-    // TODO: disable any further action after one click
-
+    soundRandomizer (){
+        var randomSound;
+        var soundsIndex;
+        for (let i = 0; i < this.state.sounds.length; i++) {
+            soundsIndex = Math.floor(Math.random()*this.state.sounds.length)
+        }
+        randomSound = this.state.sounds[soundsIndex]
+        randomSound.play();
+    }
 
     // listens for click
     clicked = (e) => {
@@ -34,7 +49,6 @@ class Square extends Component {
 
         // TODO: deconstruct props into separate variables for id, players
 
-
         // receive changeTurn function in order to fire it on parent app
         this.props.updateArr(this.props.id)
 
@@ -42,16 +56,18 @@ class Square extends Component {
 
         let newPlayer = this.props.players
 
+        this.soundRandomizer();
         // setting the players state to either X or O AND setting marked to true
-        this.setState({players: newPlayer, marked: true})
+        this.setState({players: newPlayer, marked: true, unicorn: false})
         }
     }
 
     render() {
+        let square_class = this.state.unicorn ? "section" : "section-change";
         return (
-            <section className="Square" onClick={this.clicked}>
+            <div className={square_class} onClick={this.clicked}>
                 {this.state.players}
-            </section>
+            </div>
         );
     }
 }
